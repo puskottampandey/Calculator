@@ -33,7 +33,7 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: (Colors.green),
+      color: (Colors.blue),
     );
   }
 }

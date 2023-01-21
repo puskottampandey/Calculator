@@ -57,17 +57,19 @@ class _CalculationState extends State<Calculation> {
   }
 
   Widget buildbutton(
-      String buttonText, double butttonHeight, Color buttonColor) {
-    return Container(
+    String buttonText,
+    double butttonHeight,
+    /*Color buttonColor */
+  ) {
+    return SizedBox(
       height: MediaQuery.of(context).size.height * 0.1 * butttonHeight,
-      color: buttonColor,
       child: ElevatedButton(
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(0.0),
               side: const BorderSide(
-                  color: Colors.green, width: 1, style: BorderStyle.solid),
+                  color: Colors.white, width: 1, style: BorderStyle.solid),
             ),
           ),
         ),
@@ -85,7 +87,6 @@ class _CalculationState extends State<Calculation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: (Colors.green),
         title: const Center(
           child: Text("Calculator"),
         ),
@@ -107,7 +108,7 @@ class _CalculationState extends State<Calculation> {
           ),
           const Expanded(
             child: Divider(
-              color: (Colors.green),
+              color: Colors.blue,
             ),
           ),
           Row(
@@ -118,37 +119,73 @@ class _CalculationState extends State<Calculation> {
                   children: [
                     TableRow(
                       children: [
-                        buildbutton("C", 1, Colors.redAccent),
-                        buildbutton("⌫", 1, Colors.green),
-                        buildbutton("÷", 1, Colors.green),
+                        buildbutton("C", 1),
+                        buildbutton("⌫", 1),
+                        buildbutton("÷", 1),
                       ],
                     ),
                     TableRow(
                       children: [
-                        buildbutton("7", 1, Colors.brown.shade400),
-                        buildbutton("8", 1, Colors.brown.shade400),
-                        buildbutton("9", 1, Colors.brown.shade400),
+                        buildbutton(
+                          "7",
+                          1,
+                        ),
+                        buildbutton(
+                          "8",
+                          1,
+                        ),
+                        buildbutton(
+                          "9",
+                          1,
+                        ),
                       ],
                     ),
                     TableRow(
                       children: [
-                        buildbutton("4", 1, Colors.brown.shade400),
-                        buildbutton("5", 1, Colors.brown.shade400),
-                        buildbutton("6", 1, Colors.brown.shade400),
+                        buildbutton(
+                          "4",
+                          1,
+                        ),
+                        buildbutton(
+                          "5",
+                          1,
+                        ),
+                        buildbutton(
+                          "6",
+                          1,
+                        ),
                       ],
                     ),
                     TableRow(
                       children: [
-                        buildbutton("3", 1, Colors.brown.shade400),
-                        buildbutton("2", 1, Colors.brown.shade400),
-                        buildbutton("1", 1, Colors.brown.shade400),
+                        buildbutton(
+                          "3",
+                          1,
+                        ),
+                        buildbutton(
+                          "2",
+                          1,
+                        ),
+                        buildbutton(
+                          "1",
+                          1,
+                        ),
                       ],
                     ),
                     TableRow(
                       children: [
-                        buildbutton(".", 1, Colors.brown.shade400),
-                        buildbutton(" 0", 1, Colors.brown.shade400),
-                        buildbutton("0.00 ", 1, Colors.brown.shade400),
+                        buildbutton(
+                          ".",
+                          1,
+                        ),
+                        buildbutton(
+                          " 0",
+                          1,
+                        ),
+                        buildbutton(
+                          "0.00 ",
+                          1,
+                        ),
                       ],
                     ),
                   ],
@@ -160,22 +197,34 @@ class _CalculationState extends State<Calculation> {
                   children: [
                     TableRow(
                       children: [
-                        buildbutton("×", 1, Colors.green),
+                        buildbutton(
+                          "×",
+                          1,
+                        ),
                       ],
                     ),
                     TableRow(
                       children: [
-                        buildbutton("-", 1, Colors.green),
+                        buildbutton(
+                          "-",
+                          1,
+                        ),
                       ],
                     ),
                     TableRow(
                       children: [
-                        buildbutton("+", 1, Colors.green),
+                        buildbutton(
+                          "+",
+                          1,
+                        ),
                       ],
                     ),
                     TableRow(
                       children: [
-                        buildbutton("=", 2, Colors.redAccent),
+                        buildbutton(
+                          "=",
+                          2,
+                        ),
                       ],
                     )
                   ],
