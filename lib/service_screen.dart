@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 class Calculation extends StatefulWidget {
   const Calculation({super.key});
@@ -8,6 +9,49 @@ class Calculation extends StatefulWidget {
 }
 
 class _CalculationState extends State<Calculation> {
+  String equation = "0";
+
+  String result = "0";
+  String expression = "";
+  double equationFontsize = 38.0;
+  double resultFontsize = 48.0;
+
+  buttonPressed(String buttonText) {
+    setState(() {
+      if (buttonText == "C") {
+        equation = "0";
+        result = "0";
+      } else if (buttonText == "⌫") {
+        equation = equation.substring(0, equation.length - 1);
+        if (equation == "") {
+          equation = "0";
+        }
+      } else if (buttonText == "=") {
+        equationFontsize = 38.0;
+        resultFontsize = 48.0;
+        expression = equation;
+        expression = expression.replaceAll('×', '*');
+        expression = expression.replaceAll('÷', '/');
+        try {
+          Parser p = Parser();
+          Expression exp = p.parse(expression);
+          ContextModel cm = ContextModel();
+          result = '${exp.evaluate(EvaluationType.REAL, cm)}';
+        } catch (e) {
+          result = "error";
+        }
+      } else {
+        equationFontsize = 48.0;
+        resultFontsize = 38.0;
+        if (equation == "0") {
+          equation = buttonText;
+        } else {
+          equation = equation + buttonText;
+        }
+      }
+    });
+  }
+
   Widget buildbutton(
       String buttonText, double butttonHeight, Color buttonColor) {
     return Container(
@@ -19,11 +63,11 @@ class _CalculationState extends State<Calculation> {
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(0.0),
               side: const BorderSide(
-                  color: Colors.white, width: 1, style: BorderStyle.solid),
+                  color: Colors.green, width: 1, style: BorderStyle.solid),
             ),
           ),
         ),
-        onPressed: null,
+        onPressed: () => buttonPressed(buttonText),
         child: Text(
           buttonText,
           style: const TextStyle(
@@ -47,12 +91,15 @@ class _CalculationState extends State<Calculation> {
           Container(
             alignment: Alignment.centerRight,
             padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
-            child: const Text("0", style: TextStyle(fontSize: 38)),
+            child: Text(equation, style: TextStyle(fontSize: equationFontsize)),
           ),
           Container(
             alignment: Alignment.centerRight,
             padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
-            child: const Text("0", style: TextStyle(fontSize: 48)),
+            child: Text(
+              result,
+              style: TextStyle(fontSize: resultFontsize),
+            ),
           ),
           const Expanded(
             child: Divider(
@@ -62,7 +109,7 @@ class _CalculationState extends State<Calculation> {
           Row(
             children: [
               SizedBox(
-                width: MediaQuery.of(context).size.width * .75,
+                width: MediaQuery.of(context).size.width * 0.75,
                 child: Table(
                   children: [
                     TableRow(
@@ -75,22 +122,22 @@ class _CalculationState extends State<Calculation> {
                     TableRow(
                       children: [
                         buildbutton("7", 1, Colors.brown.shade400),
-                        buildbutton(" 8", 1, Colors.brown.shade400),
-                        buildbutton(" 9", 1, Colors.brown.shade400),
+                        buildbutton("8", 1, Colors.brown.shade400),
+                        buildbutton("9", 1, Colors.brown.shade400),
                       ],
                     ),
                     TableRow(
                       children: [
                         buildbutton("4", 1, Colors.brown.shade400),
                         buildbutton("5", 1, Colors.brown.shade400),
-                        buildbutton(" 6", 1, Colors.brown.shade400),
+                        buildbutton("6", 1, Colors.brown.shade400),
                       ],
                     ),
                     TableRow(
                       children: [
                         buildbutton("3", 1, Colors.brown.shade400),
-                        buildbutton(" 2", 1, Colors.brown.shade400),
-                        buildbutton(" 1", 1, Colors.brown.shade400),
+                        buildbutton("2", 1, Colors.brown.shade400),
+                        buildbutton("1", 1, Colors.brown.shade400),
                       ],
                     ),
                     TableRow(
@@ -109,22 +156,22 @@ class _CalculationState extends State<Calculation> {
                   children: [
                     TableRow(
                       children: [
-                        buildbutton("×", 1, Colors.brown.shade400),
+                        buildbutton("×", 1, Colors.green),
                       ],
                     ),
                     TableRow(
                       children: [
-                        buildbutton("-", 1, Colors.brown.shade400),
+                        buildbutton("-", 1, Colors.green),
                       ],
                     ),
                     TableRow(
                       children: [
-                        buildbutton("+", 1, Colors.brown.shade400),
+                        buildbutton("+", 1, Colors.green),
                       ],
                     ),
                     TableRow(
                       children: [
-                        buildbutton("=", 2, Colors.brown.shade400),
+                        buildbutton("=", 2, Colors.redAccent),
                       ],
                     )
                   ],
