@@ -25,6 +25,7 @@ class _CalculationState extends State<Calculation> {
         equation = equation.substring(0, equation.length - 1);
         if (equation == "") {
           equation = "0";
+          result = "0";
         }
       } else if (buttonText == "=") {
         equationFontsize = 38.0;
@@ -32,11 +33,14 @@ class _CalculationState extends State<Calculation> {
         expression = equation;
         expression = expression.replaceAll('×', '*');
         expression = expression.replaceAll('÷', '/');
+
         try {
           Parser p = Parser();
           Expression exp = p.parse(expression);
           ContextModel cm = ContextModel();
           result = '${exp.evaluate(EvaluationType.REAL, cm)}';
+          equation = result;
+          result = "";
         } catch (e) {
           result = "error";
         }
